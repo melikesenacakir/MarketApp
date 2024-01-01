@@ -120,7 +120,6 @@ namespace MarketingApp
 
                 AddEarning();
                 b.Close();
-                this.Close();
             }else
             {
                 MessageBox.Show("Veritabanı bağlantısı kapalı.");
