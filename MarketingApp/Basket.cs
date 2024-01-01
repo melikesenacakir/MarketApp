@@ -13,6 +13,7 @@ namespace MarketingApp
         public Basket()
         {
             Product = new List<Products>();
+
         }
 
         public void AddOrUpdateProduct(Products product)
@@ -25,8 +26,7 @@ namespace MarketingApp
             }
             else
             {
-                Product.Add(product);
-            }
+                Product.Add(product);            }
         }
     }
 }

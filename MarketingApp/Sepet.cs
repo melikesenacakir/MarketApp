@@ -13,10 +13,12 @@ namespace MarketingApp
     public partial class Sepet : Form
     {
         private Basket sepet;
-        public Sepet(Basket sepet)
+        private string username;
+        public Sepet(Basket sepet, string username)
         {
             InitializeComponent();
             this.sepet = sepet;
+            this.username = username; 
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -27,7 +29,7 @@ namespace MarketingApp
         private void button1_Click(object sender, EventArgs e)
         {
             decimal price = sepet.Product.Sum(p => p.Fiyat * p.Miktar);
-            Payment odeme=new Payment(price,sepet);
+            Payment odeme=new Payment(price,sepet,username);
             odeme.Show();
         }
 
@@ -35,8 +37,18 @@ namespace MarketingApp
         {
 
             dataGridView1.DataSource = sepet.Product;
-            decimal toplamFiyat = sepet.Product.Sum(p => p.Fiyat * p.Miktar);
-            label1.Text = $"Toplam Fiyat: {toplamFiyat:C}";
+            if(sepet.Product!=null)
+            {
+                decimal toplamFiyat = sepet.Product.Sum(p => p.Fiyat * p.Miktar);
+                label1.Text = $"Toplam Fiyat: {toplamFiyat:C}";
+
+            }
+            else
+            {
+                decimal toplamFiyat = 0;
+                label1.Text = $"Toplam Fiyat: {toplamFiyat:C}";
+            }
+           
 
         }
 

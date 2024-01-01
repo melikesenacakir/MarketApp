@@ -17,11 +17,14 @@ namespace MarketingApp
         public String conString = "Data Source=DESKTOP-BFQR825\\SQLEXPRESS;Initial Catalog=MarketDb;Integrated Security=True;MultipleActiveResultSets=True";
         private Basket sepet;
         private decimal price;
-        public Payment(decimal price, Basket sepet)
+        private string username;
+        public Payment(decimal price, Basket sepet, string username)
         {
             InitializeComponent();
             this.price = price;
+            this.username = username;
             textBox3.Text = price.ToString();
+            textBox1.Text = username;
             this.sepet = sepet;
         }
 
@@ -56,7 +59,7 @@ namespace MarketingApp
                         cmd1.ExecuteNonQuery();
                     }
 
-                sepet.Product = default;
+                sepet.Product.Clear();
                 MessageBox.Show("Ödeme Tamamlandı. Saat 19.00' da getireceğiz :)");
                 b.Close();
             }
@@ -87,10 +90,37 @@ namespace MarketingApp
                                 cmd2.Parameters.AddWithValue("@urun",product.UrunAdi);
                                 cmd2.ExecuteNonQuery();
                             }
-                        }
                     }
+                }
+                    dr.Close();
+                foreach (var product in sepet.Product)
+                {
+                    string query3 = "select id from usertbl where username=@username";
+                    SqlCommand cmd3 = new SqlCommand(query3, b);
+                    cmd3.Parameters.AddWithValue("@username", username);
+                    SqlDataReader dr2 = cmd3.ExecuteReader();
+                    if (dr2.Read())
+                    {
+                        DateTime date = DateTime.Now;
+                        string query4 = "insert into OrderHistory values (@order,@userid,@date,@price,@amount)";
+                        SqlCommand cmd4 = new SqlCommand(query4, b);
+                        cmd4.Parameters.AddWithValue("@order", product.UrunAdi);
+                        cmd4.Parameters.AddWithValue("@userid", dr2["id"].ToString());
+                        cmd4.Parameters.AddWithValue("@date",date);
+                        cmd4.Parameters.AddWithValue("@price", product.Fiyat);
+                        cmd4.Parameters.AddWithValue("@amount", product.Miktar);
+                        cmd4.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        
+                    }
+                    dr2.Close();
+                }
+
                 AddEarning();
                 b.Close();
+                this.Close();
             }else
             {
                 MessageBox.Show("Veritabanı bağlantısı kapalı.");

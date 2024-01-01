@@ -19,3 +19,4 @@ C:\Users\Melike\source\repos\UdemyProjeler\MarketingApp\MarketingApp\obj\Debug\M
 C:\Users\Melike\source\repos\UdemyProjeler\MarketingApp\MarketingApp\obj\Debug\MarketingApp.User_info.resources
 C:\Users\Melike\source\repos\UdemyProjeler\MarketingApp\MarketingApp\obj\Debug\MarketingApp.EarningChart.resources
 C:\Users\Melike\source\repos\UdemyProjeler\MarketingApp\MarketingApp\obj\Debug\MarketingApp.Stok_durum.resources
+C:\Users\Melike\source\repos\UdemyProjeler\MarketingApp\MarketingApp\obj\Debug\MarketingApp.OrderHistory.resources

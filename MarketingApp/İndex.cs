@@ -82,7 +82,7 @@ namespace MarketingApp
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Sepet sepett = new Sepet(sepet);
+            Sepet sepett = new Sepet(sepet,username);
             sepett.Show();
         }
 
@@ -138,6 +138,12 @@ namespace MarketingApp
         private void button12_Click(object sender, EventArgs e)
         {
             Sepetim(textBox10.Text, label11.Text);
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            OrderHistory order=new OrderHistory(username);
+            order.Show();
         }
     }
 }
